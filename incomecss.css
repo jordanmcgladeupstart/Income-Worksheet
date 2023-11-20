@@ -1,0 +1,129 @@
+div{
+    padding: 10px;
+    background: #01B1AC;
+}
+body{
+    font-family: 'Montserrat';
+    background: #00807B;
+}
+button{
+    padding: 10px;
+    border: 1px solid black;
+    background: linear-gradient(to bottom, #ffffff 0%, #dddddd 100%);   
+}
+.tablink{
+    margin: -2px;
+}
+button:hover{
+    background: rgb(50, 50, 200);
+    color: white;
+    cursor: pointer;
+}
+.header{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+.active{
+    background: rgb(0, 0, 255);
+    color: white;
+}
+#tabContainer{
+    padding: 2px;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+th{
+    background: linear-gradient(to bottom, #ffffff 0%, #dddddd 100%);
+    color: black;
+    padding: 5px;
+    border: 1px solid black;
+}
+td{
+    text-align: center;
+    padding: 5px;
+    border: 1px solid black;
+}
+table tr:nth-child(even){
+    background: #dddddd;
+}
+table tr:nth-child(odd){
+    background: #ffffff;
+}
+select{
+    text-align: center;
+    padding: 5px;
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+}
+#paystubDiv{
+    background: white;
+    border: 1px solid black;
+    padding: 10px;
+}
+#paystubHeader{
+    background: white;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    height: 70px;
+}
+#paystubBody{
+    margin-top: 10px;
+    background: white;
+    text-align: left;
+    padding: 10px;
+}
+#paystubBody table{
+    border-collapse: collapse;
+    margin-top: 8px;
+    width: 100%;
+}
+.stubTable{
+    border-collapse:collapse;
+    float:left;
+    width: 33%;
+    border: 1px solid black;
+}
+.stubTable td{
+    text-align: left;
+    border: none;
+    font-size: 14px;
+    padding: 5px;
+    background: white;
+}
+#overlay{
+    position: absolute;
+    padding: 10%;
+    padding-left:25%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+#metadataTable, #metadataTable td, #metadataTable th{
+    border: none;
+    width:auto;
+    height:auto;
+    overflow-y: scroll;
+    background: white;
+}
+#metadata{
+    font-family:Arial, Helvetica, sans-serif;
+    width:70vh;
+    height:350px;
+}
+.incomplete{
+    display: none;
+}
+input{
+    width:200px;
+}
+

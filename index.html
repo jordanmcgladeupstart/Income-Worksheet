@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Income Verification Worksheet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="incomecss.css">
+    <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+</head>
+<style>
+</style>
+<body>
+    <div id="overlay">
+        <div id="metadata">
+            <div style="text-align: right; background: white; width: auto;height:50vh;overflow:auto"><button id="closeOverlayBtn" onclick="closeOverlay()">&#10006;</button>
+        
+                <table id="metadataTable">
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        Income Verification Worksheet
+    </div>
+    <div id="tabContainer">
+        <button class="tablink active" onclick="openTab('payPeriods', this)" id="payPeriodsButton">Pay Periods</button>
+        <button class="tablink" onclick="openTab('payFrequency', this)" id="payFrequencyButton">Pay Frequency</button>
+        <button class="tablink incomplete" onclick="openTab('regularEarnings', this)" id="regularEarningsButton">Regular Earnings</button>
+        <button class="tablink incomplete" onclick="openTab('acceptableEarnings', this)" id="acceptableEarningsButton">Acceptable Earnings</button>
+        <button class="tablink" onclick="openTab('randomPaystub', this)" id="randomPaystubButton">Random Paystub</button>
+        <button class="tablink incomplete" onclick="openTab('randomLES', this)" id="randomLESButton">Random LES</button>
+    </div>
+    <div id="contentContainer">
+        <div id="payPeriods" class="tab">
+            <button id="getNewPayPeriods" onclick="getNewPayPeriods()">Get New Pay Periods</button>
+            <table id="payPeriodsTable" class="fillableTable">
+                <tr>
+                    <th>Pay Period</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Pay Date</th>
+                </tr>
+            </table>
+        </div>
+        <div id="payFrequency" class="tab" style="display:none">
+            <button onclick="checkPayFrequency2()">Check Answers</button>
+            <table id="payFrequencyTable">
+                <tr>
+                    <th>Pay Frequency</th>
+                    <th>Pay Periods Per Year</th>
+                    <th>Days in Pay Period</th>
+                    <th>Maximum Hours</th>
+                </tr>
+                <tr>
+                    <td>Weekly</td>
+                    <td><input type='number' answer='52' placeholder='Please Enter An Amount'></td>
+                    <td><input type='number' answer='7' placeholder='Please Enter An Amount'></td>
+                    <td><input type='number' answer='40' placeholder='Please Enter An Amount'></td>
+                </tr>
+                <tr>
+                    <td>Bi-Weekly</td>
+                    <td><input type='number' answer='26' placeholder='Please Enter An Amount'></td>
+                    <td><input type='number' answer='14' placeholder='Please Enter An Amount'></td>
+                    <td><input type='number' answer='80' placeholder='Please Enter An Amount'></td>
+                </tr>
+                <tr>
+                    <td>Semi-Monthly</td>
+                    <td><input type='number' answer='24' placeholder='Please Enter An Amount'></td>
+                    <td><input type='number' answer='[15,16]' placeholder='Please Enter An Amount'></td>
+                    <td><input type='number' answer='88.5' placeholder='Please Enter An Amount'></td>
+                </tr>
+                <tr>
+                    <td>Monthly</td>
+                    <td><input type='number' answer='12' placeholder='Please Enter An Amount'></td>
+                    <td><input type='number' answer='[30,31]' placeholder='Please Enter An Amount'></td>
+                    <td><input type='number' answer='160' placeholder='Please Enter An Amount'></td>
+                </tr>
+            </table>
+        </div>  
+        <div id="regularEarnings" class="tab" style="display:none">
+            regular earnings
+        </div>
+        <div id="acceptableEarnings" class="tab" style="display:none">
+            acceptable earnings
+        </div>
+        <div id="randomPaystub" class="tab" style="display:none">
+            <div id="paystubSectionHeader" style="padding:0;">
+                <table>
+                    <tr>
+                        <td>
+                            <button id="getNewPaystub" onclick="paystubGenerator()">Get New Paystub</button>
+                        </td>
+                        <td>
+                            What amount does the YTD income calculator verify?
+                            <br><input type="number" id="ytdIncome" placeholder="Please Enter An Amount">
+                            <button onclick="checkIncomeCalc('ytdIncome')">Check YTD Income</button>
+                        </td>
+                        <td>
+                            What amount does the Manual income calculator verify?
+                            <br><input type="number" id="manualIncome" placeholder="Please Enter An Amount">
+                            <button onclick="checkIncomeCalc('manualIncome')">Check Manual Income</button>
+                        </td>
+                        <td>
+                            <button id="viewMetadataButton" onclick="viewMetadata()">View Metadata</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="paystubDiv">
+                <!-- Create a paystub layout that I can fill with javascript -->
+                <div id="paystubHeader">
+                    <table id="companyInfo" class="stubTable">
+                        <tr><td id="companyName"></td></tr>
+                        <tr><td id="companyAddress"></td></tr>
+                        <tr><td id="companyPhone"></td></tr>
+                    </table>
+                    <table id="employeeInfo" class="stubTable">
+                        <tr><td id="employeeName"></td></tr>
+                        <tr><td id="employeeAddress"></td></tr>
+                        <tr><td id="employeePhone"></td></tr>
+                    </table>
+                    <table id="stubDateInfo" class="stubTable" style="float:right;width:34%">
+                        <tr>
+                            <td>Start Date:</td><td id="startDatePaystub"></td>
+                        </tr>
+                        <tr>
+                            <td>End Date:</td><td id="endDatePaystub"></td>
+                        </tr>
+                        <tr>
+                            <td>Pay Date:</td><td id="payDatePaystub"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="paystubBody">
+                    <table id="paystubEarnings">
+                        <tr>
+                            <th>Earnings</th>
+                            <th>Hours</th>
+                            <th>Rate</th>
+                            <th>Current</th>
+                            <th>YTD</th>
+                        </tr>
+                    </table>
+                    <table id="paystubDeductions">
+                        <tr>
+                            <th>Deductions</th>
+                            <th>Current</th>
+                            <th>YTD</th>
+                        </tr>
+                    </table>
+                    <table id="paystubNetPay">
+                        <tr>
+                            <th>Net Pay</th>
+                            <th>Current</th>
+                            <th>YTD</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>  
+        <div id="randomLES" class="tab" style="display:none">
+            random LES
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="incomejs.js"></script>
+</html>
+
