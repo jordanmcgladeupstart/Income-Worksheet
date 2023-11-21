@@ -501,10 +501,11 @@ function paystubGenerator() {
     row.insertCell(0).innerHTML = "Total";
     row.insertCell(1).innerHTML = "";
     row.insertCell(2).innerHTML = "";
-    row.insertCell(3).innerHTML = Math.floor((current_earnings_object["Regular"]+current_earnings_object["Commission"]+current_earnings_object["Tips"]+current_earnings_object["Vacation"]+current_earnings_object["Sick"]+current_earnings_object["Holiday"]+current_earnings_object["Bonus"]+current_earnings_object["Weekends"]+current_earnings_object["PerDiem"]+current_earnings_object["Stipend"]+current_earnings_object["Overtime"])*100)/100;
+    row.insertCell(3).innerHTML = 0;
     row.insertCell(4).innerHTML = 0;
     for(let i=0; i<paystubEarnings.rows.length-1; i++){
         if(i==0) continue;
+        row.cells[3].innerHTML = (Number(row.cells[3].innerHTML) + Number(paystubEarnings.rows[i].cells[3].innerHTML)).toFixed(2);
         row.cells[4].innerHTML = (Number(row.cells[4].innerHTML) + Number(paystubEarnings.rows[i].cells[4].innerHTML)).toFixed(2);
     }
     
